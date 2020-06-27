@@ -5,6 +5,13 @@ set -x
 apt-get --yes update
 apt-get --yes install wget gnupg2
 
+### Add Focal Repository to update packages.
+wget -qO /etc/apt/sources.list.d/ubuntu-focal-repo.list https://raw.githubusercontent.com/Nitrux/nitrux-iso-tool/development/configs/files/sources.list.ubuntu.focal
+apt-get --yes update
+apt-get --yes install libyaml-cpp-dev libpython3.8-dev libboost-python1.71-dev
+
+rm /etc/apt/sources.list.d/ubuntu-focal-repo.list 
+
 ### Install Dependencies
 apt-get --yes update
 apt-get --yes dist-upgrade
