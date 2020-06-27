@@ -1,0 +1,10 @@
+# These are hooks that is incorperated in initramfs and does not need to be executable by itself.
+calamares: script-not-executable
+
+# Private libraries, so no -dev packages or symbol files
+calamares: non-dev-pkg-with-shlib-symlink
+calamares: no-symbols-control-file
+calamares: package-name-doesnt-match-sonames
+
+# Debian live media relies on sudo so this message isn't needed
+calamares: desktop-command-not-in-package usr/share/applications/calamares.desktop sudo

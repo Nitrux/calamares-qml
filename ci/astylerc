@@ -1,0 +1,13 @@
+# Do not create a backup file
+suffix=none
+
+indent=spaces=4
+
+# Brackets
+style=break
+add-brackets
+
+# Spaces
+pad-paren-in
+pad-header
+align-pointer=type
