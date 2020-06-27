@@ -6,12 +6,12 @@ addons:
     packages:
     - realpath
 install:
-- docker pull ubuntu:focal
+- docker pull mauikit/ubuntu-18.04-amd64
 - wget https://raw.githubusercontent.com/Nitrux/nitrux-repository-util/master/nitrux-repository-util.sh
   -O nitrux-repository-util.sh
 - chmod +x nitrux-repository-util.sh
 script:
-- docker run --rm -v $(pwd)/:/build/ -w /build/ ubuntu:focal /bin/bash travis-build.sh
+- docker run --rm -v $(pwd)/:/build/ -w /build/ mauikit/ubuntu-18.04-amd64 /bin/bash travis-build.sh
 branches:
   only:
   - master
