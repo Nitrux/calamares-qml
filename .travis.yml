@@ -6,7 +6,7 @@ addons:
     packages:
     - realpath
 install:
-- docker pull ubuntu:bionic
+- docker pull mauikit/ubuntu-18.04-amd64
 - wget https://raw.githubusercontent.com/Nitrux/nitrux-repository-util/master/nitrux-repository-util.sh
   -O nitrux-repository-util.sh
 - chmod +x nitrux-repository-util.sh

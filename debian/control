@@ -49,7 +49,8 @@ Package: calamares-qml
 Architecture: linux-any
 Depends: os-prober, ${misc:Depends}, ${shlibs:Depends}
 Recommends: btrfs-progs, squashfs-tools
-Replaces: calamares
+Conflicts: calamares
+Provides: calamares
 Description: distribution-independent installer framework
  Calamares is a distribution-independent installer framework.
  .
