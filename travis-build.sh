@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 apt-get --yes update
 apt-get --yes install wget gnupg2
 
