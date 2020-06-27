@@ -10,7 +10,7 @@ wget -qO /etc/apt/sources.list.d/neon-user-repo.list https://raw.githubuserconte
 ### Install Dependencies
 apt-get --yes update
 apt-get --yes dist-upgrade
-DEBIAN_FRONTEND=noninteractive apt-get --yes install devscripts lintian build-essential automake autotools-dev equivs keyboard-configuration
+DEBIAN_FRONTEND=noninteractive apt-get --yes install devscripts lintian build-essential automake autotools-dev equivs keyboard-configuration console-setup
 mk-build-deps -i -t "apt-get --yes" -r
 
 ### Build Deb
