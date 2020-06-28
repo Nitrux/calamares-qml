@@ -37,7 +37,9 @@ Build-Depends: cmake,
                qtbase5-dev,
                qtdeclarative5-dev,
                qttools5-dev,
-               qttools5-dev-tools
+               qttools5-dev-tools,
+               libkf5plasma-dev,
+               libkf5package-dev,
 Standards-Version: 4.5.0
 Homepage: https://github.com/calamares/calamares
 Vcs-Browser: https://phab.lubuntu.me/source/calamares/
