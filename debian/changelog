@@ -1,3 +1,9 @@
+calamares-qml (3.2.26.5) nitrux; urgency=medium
+
+  * Module bootloader use partiionq module.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 27 Jun 2020 20:07:00 -0500
+
 calamares-qml (3.2.26.4) nitrux; urgency=medium
 
   * Update package.
