@@ -75,6 +75,9 @@ public:
         emit currentIndexChanged(m_currentIndex);
     }
 
+    void restoreSelectedBootLoader(const QString& path);
+
+
 private:
     DeviceList m_devices;
     mutable QMutex m_lock;

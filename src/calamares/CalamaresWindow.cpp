@@ -340,20 +340,20 @@ CalamaresWindow::CalamaresWindow( QWidget* parent )
     resize( w, h );
 
     QWidget* baseWidget = this;
-    if ( !( branding->imagePath( ImageEntry::ProductWallpaper ).isEmpty() ) )
-    {
-        QWidget* label = new QWidget( this );
-        QVBoxLayout* l = new QVBoxLayout;
-        CalamaresUtils::unmarginLayout( l );
-        l->addWidget( label );
-        setLayout( l );
-        label->setObjectName( "backgroundWidget" );
-        label->setStyleSheet(
-            QStringLiteral( "#backgroundWidget { background-image: url(%1); background-repeat: repeat-xy; }" )
-                .arg( branding->imagePath( ImageEntry::ProductWallpaper ) ) );
-
-        baseWidget = label;
-    }
+//     if ( !( branding->imagePath( ImageEntry::ProductWallpaper ).isEmpty() ) )
+//     {
+//         QWidget* label = new QWidget( this );
+//         QVBoxLayout* l = new QVBoxLayout;
+//         CalamaresUtils::unmarginLayout( l );
+//         l->addWidget( label );
+//         setLayout( l );
+//         label->setObjectName( "backgroundWidget" );
+//         label->setStyleSheet(
+//             QStringLiteral( "#backgroundWidget { background-image: url(%1); background-repeat: repeat-xy; background-color: red }" )
+//                 .arg( branding->imagePath( ImageEntry::ProductWallpaper ) ) );
+//
+//         baseWidget = label;
+//     }
 
     m_viewManager = Calamares::ViewManager::instance( baseWidget );
     if ( branding->windowExpands() )

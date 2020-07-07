@@ -122,6 +122,8 @@ FinishedQmlViewStep::sendNotification()
 void
 FinishedQmlViewStep::onActivate()
 {
+    m_config->setUpRestart();
+
     if ( m_notifyOnFinished )
     {
         sendNotification();

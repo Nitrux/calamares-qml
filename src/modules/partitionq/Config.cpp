@@ -970,23 +970,23 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //     PartitionBarsView::NoNestedPartitions;
 //
     m_reuseHomeOption->hide();
-//     Calamares::JobQueue::instance()->globalStorage()->insert( "reuseHome", false );
-//
-//     switch ( choice )
-//     {
-//         case Alongside:
-//         {
-//             if ( m_enableEncryptionWidget )
-//                 m_encryptWidget->show();
+    Calamares::JobQueue::instance()->globalStorage()->insert( "reuseHome", false );
+
+    switch ( choice )
+    {
+        case Alongside:
+        {
+            if ( m_encryptOption->enabled() )
+                m_encryptOption->show();
 //             m_previewBeforeLabel->setText( tr( "Current:" ) );
 //             m_selectLabel->setText( tr( "<strong>Select a partition to shrink, "
 //             "then drag the bottom bar to resize</strong>" ) );
 //             m_selectLabel->show();
-//
+
 //             m_afterPartitionSplitterWidget = new PartitionSplitterWidget( m_previewAfterFrame );
 //             m_afterPartitionSplitterWidget->init( selectedDevice(), mode == PartitionBarsView::DrawNestedPartitions );
 //             layout->addWidget( m_afterPartitionSplitterWidget );
-//
+
 //             QLabel* sizeLabel = new QLabel( m_previewAfterFrame );
 //             layout->addWidget( sizeLabel );
 //             sizeLabel->setWordWrap( true );
@@ -1002,10 +1002,10 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //                          .arg( *Calamares::Branding::ShortProductName ) );
 //                      }
 //             );
-//
+
 //             m_previewAfterFrame->show();
 //             m_previewAfterLabel->show();
-//
+
 //             SelectionFilter filter = [ this ]( const QModelIndex& index )
 //             {
 //                 return PartUtils::canBeResized(
@@ -1015,25 +1015,25 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //             };
 //             m_beforePartitionBarsView->setSelectionFilter( filter );
 //             m_beforePartitionLabelsView->setSelectionFilter( filter );
-//
-//             break;
-//         }
-//         case Erase:
-//         case Replace:
-//         {
-//             if ( m_enableEncryptionWidget )
-//                 m_encryptWidget->show();
+
+            break;
+        }
+        case Erase:
+        case Replace:
+        {
+            if ( m_encryptOption->enabled() )
+                m_encryptOption->show();
 //             m_previewBeforeLabel->setText( tr( "Current:" ) );
 //             m_afterPartitionBarsView = new PartitionBarsView( m_previewAfterFrame );
 //             m_afterPartitionBarsView->setNestedPartitionsMode( mode );
 //             m_afterPartitionLabelsView = new PartitionLabelsView( m_previewAfterFrame );
 //             m_afterPartitionLabelsView->setExtendedPartitionHidden( mode == PartitionBarsView::NoNestedPartitions );
 //             m_afterPartitionLabelsView->setCustomNewRootLabel( *Calamares::Branding::BootloaderEntryName );
-//
-//             PartitionModel* model = m_core->partitionModelForDevice( selectedDevice() );
-//
-//             // The QObject parents tree is meaningful for memory management here,
-//             // see qDeleteAll above.
+
+            PartitionModel* model = m_core->partitionModelForDevice( selectedDevice() );
+
+            // The QObject parents tree is meaningful for memory management here,
+            // see qDeleteAll above.
 //             m_afterPartitionBarsView->setModel( model );
 //             m_afterPartitionLabelsView->setModel( model );
 //             m_afterPartitionBarsView->setSelectionMode( QAbstractItemView::NoSelection );
@@ -1041,9 +1041,9 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //
 //             layout->addWidget( m_afterPartitionBarsView );
 //             layout->addWidget( m_afterPartitionLabelsView );
-//
-//             if ( !m_isEfi )
-//             {
+
+            if ( !m_isEfi )
+            {
 //                 QWidget* eraseWidget = new QWidget;
 //
 //                 QHBoxLayout* eraseLayout = new QHBoxLayout;
@@ -1052,40 +1052,38 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //                 QLabel* eraseBootloaderLabel = new QLabel( eraseWidget );
 //                 eraseLayout->addWidget( eraseBootloaderLabel );
 //                 eraseBootloaderLabel->setText( tr( "Boot loader location:" ) );
-//
+
 //                 m_bootloaderComboBox = createBootloaderComboBox( eraseWidget );
-//                 connect( m_core->bootLoaderModel(), &QAbstractItemModel::modelReset,
-//                          [ this ]()
-//                          {
-//                              if ( !m_bootloaderComboBox.isNull() )
-//                                  Calamares::restoreSelectedBootLoader( *m_bootloaderComboBox, m_core->bootLoaderInstallPath() );
-//                          }
-//                 );
-//                 connect( m_core, &PartitionCoreModule::deviceReverted, this,
-//                          [ this ]( Device* dev )
-//                          {
-//                              Q_UNUSED( dev )
-//                              if ( !m_bootloaderComboBox.isNull() )
-//                              {
-//                                  if ( m_bootloaderComboBox->model() != m_core->bootLoaderModel() )
-//                                      m_bootloaderComboBox->setModel( m_core->bootLoaderModel() );
-//
-//                                  m_bootloaderComboBox->setCurrentIndex( m_lastSelectedDeviceIndex );
-//                              }
-//                          }, Qt::QueuedConnection );
-//                 // ^ Must be Queued so it's sure to run when the widget is already visible.
-//
+                connect( m_core->bootLoaderModel(), &QAbstractItemModel::modelReset,
+                         [ this ]()
+                         {
+                                 m_bootloaderModel->restoreSelectedBootLoader( m_core->bootLoaderInstallPath() );
+                         }
+                );
+                connect( m_core, &PartitionCoreModule::deviceReverted, this,
+                         [ this ]( Device* dev )
+                         {
+                             Q_UNUSED( dev )
+
+                                 if ( m_bootloaderModel != m_core->bootLoaderModel() )
+                                     m_bootloaderModel = m_core->bootLoaderModel();
+
+                                 m_bootloaderModel->setCurrentIndex( m_lastSelectedDeviceIndex );
+
+                         }, Qt::QueuedConnection );
+                // ^ Must be Queued so it's sure to run when the widget is already visible.
+
 //                 eraseLayout->addWidget( m_bootloaderComboBox );
 //                 eraseBootloaderLabel->setBuddy( m_bootloaderComboBox );
 //                 eraseLayout->addStretch();
 //
 //                 layout->addWidget( eraseWidget );
-//             }
-//
+            }
+
 //             m_previewAfterFrame->show();
 //             m_previewAfterLabel->show();
-//
-//             if ( m_choice == Erase )
+
+//             if ( m_installChoice == Erase )
 //                 m_selectLabel->hide();
 //             else
 //             {
@@ -1102,21 +1100,21 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //                 m_selectLabel->show();
 //                 m_selectLabel->setText( tr( "<strong>Select a partition to install on</strong>" ) );
 //             }
-//
-//             break;
-//         }
-//         case NoChoice:
-//         case Manual:
+
+            break;
+        }
+        case NoChoice:
+        case Manual:
 //             m_selectLabel->hide();
 //             m_previewAfterFrame->hide();
 //             m_previewBeforeLabel->setText( tr( "Current:" ) );
 //             m_previewAfterLabel->hide();
-//             m_encryptWidget->hide();
-//             break;
-//     }
-//
-//     if ( m_isEfi && ( m_choice == Alongside || m_choice == Replace ) )
-//     {
+            m_encryptOption->hide();
+            break;
+    }
+
+    if ( m_isEfi && ( m_installChoice == Alongside || m_installChoice == Replace ) )
+    {
 //         QHBoxLayout* efiLayout = new QHBoxLayout;
 //         layout->addLayout( efiLayout );
 //         m_efiLabel = new QLabel( m_previewAfterFrame );
@@ -1126,9 +1124,9 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //         m_efiLabel->setBuddy( m_efiComboBox );
 //         m_efiComboBox->hide();
 //         efiLayout->addStretch();
-//     }
-//
-//     // Also handle selection behavior on beforeFrame.
+    }
+
+    // Also handle selection behavior on beforeFrame.
 //     QAbstractItemView::SelectionMode previewSelectionMode;
 //     switch ( m_choice )
 //     {

@@ -79,6 +79,7 @@ QmlViewStep::QmlViewStep( QObject* parent )
     CalamaresUtils::registerQmlModels();
 
     QVBoxLayout* layout = new QVBoxLayout( m_widget );
+    layout->setSpacing(0);
     layout->addWidget( m_spinner );
 
     m_qmlWidget->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );

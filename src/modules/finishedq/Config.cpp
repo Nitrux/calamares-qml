@@ -40,13 +40,14 @@ Config::Config(QObject *parent) : QObject(parent)
 
     CALAMARES_RETRANSLATE(
         const auto* branding = Calamares::Branding::instance();
+
         if ( Calamares::Settings::instance()->isSetupMode() ) {
             m_message = tr( "<h1>All done.</h1><br/>"
             "%1 has been set up on your computer.<br/>"
             "You may now start using your new system." )
             .arg( branding->versionedName() );
 
-            m_restartOption->setTooltip( tr( "<html><head/><body>"
+            m_restartOption->setLabel( tr( "<html><head/><body>"
             "<p>When this box is checked, your system will "
             "restart immediately when you click on "
             "<span style=\"font-style:italic;\">Done</span> "
@@ -58,7 +59,7 @@ Config::Config(QObject *parent) : QObject(parent)
             "using the %2 Live environment." )
             .arg( branding->versionedName(), branding->productName() ) ;
 
-           m_restartOption->setTooltip( tr( "<html><head/><body>"
+           m_restartOption->setLabel( tr( "<html><head/><body>"
             "<p>When this box is checked, your system will "
             "restart immediately when you click on "
             "<span style=\"font-style:italic;\">Done</span> "

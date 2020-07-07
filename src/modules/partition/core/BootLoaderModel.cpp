@@ -172,6 +172,48 @@ BootLoaderModel::roleNames() const
     { Roles::IsPartitionRole, "ispartition" }};
 }
 
+void BootLoaderModel::restoreSelectedBootLoader(const QString& path)
+{
+    if ( rowCount() < 1 )
+    {
+        cDebug() << "No items in BootLoaderModel";
+        return;
+    }
+
+    auto findBootloader = [&]( const QString& path ) -> int
+    {
+        for ( int i = 0; i < rowCount(); ++i )
+        {
+            const auto index_ = index( i, 0, QModelIndex() );
+            if ( !index_.isValid() )
+            {
+                continue;
+            }
+            QVariant var = data( index_, BootLoaderModel::BootLoaderPathRole );
+            if ( var.isValid() && var.toString() == path )
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    };
+
+    int r = -1;
+    if ( path.isEmpty() )
+    {
+        setCurrentIndex( 0 );
+    }
+    else if ( ( r = findBootloader( path ) ) >= 0 )
+    {
+        setCurrentIndex( r );
+    }
+    else
+    {
+        setCurrentIndex( 0 );
+    }
+}
+
 namespace Calamares
 {
 int
