@@ -1,13 +1,10 @@
 #!/bin/bash
 
-set -x
-
-apt-get --yes update
-apt-get --yes install wget gnupg2
+apt -qq update
+apt -qq -yy install equivs curl git
 
 ### Install Dependencies
-apt-get --yes update
-apt-get --yes dist-upgrade
+apt -qq -yy dist-upgrade
 DEBIAN_FRONTEND=noninteractive apt-get --yes install devscripts lintian build-essential automake autotools-dev equivs keyboard-configuration console-setup
 mk-build-deps -i -t "apt-get --yes" -r
 
