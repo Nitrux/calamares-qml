@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wl,--no-undefined -Wl,--fatal-warnings -Wnon-virtual-dtor -Woverloaded-virtual -Werror=return-type -DNOTREACHED='__builtin_unreachable();' -DFALLTHRU='/* */' -fdiagnostics-color=auto  -rdynamic CMakeFiles/txload.dir/txload.cpp.o  -o txload  /usr/lib/libQt5Xml.so.5.15.0 /usr/lib/libQt5Core.so.5.15.0 

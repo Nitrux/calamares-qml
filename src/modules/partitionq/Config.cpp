@@ -230,26 +230,12 @@ Config::init(const SwapChoiceSet& swapChoices, PartitionCoreModule* core)
     m_deviceModel = core->deviceModel();
     emit devicesModelChanged();
 
-    m_bootloaderModel = core->bootLoaderModel();
-    emit bootloaderModelChanged();
-
     m_isEfi = PartUtils::isEfiSystem();
     emit isEfiChanged();
 
     m_availableSwapChoices = swapChoices; //TODO a model or whats up?
     m_eraseSwapChoice = pickOne(swapChoices);
-
-    // When the chosen bootloader device changes, we update the choice in the PCM
-    connect( m_bootloaderModel, &BootLoaderModel::currentIndexChanged,
-             this, [this]( int newIndex )
-             {
-                 QVariant var = m_bootloaderModel->data( m_bootloaderModel->index(newIndex, 0) , BootLoaderModel::BootLoaderPathRole );
-                 if ( !var.isValid() )
-                     return;
-                 m_core->setBootLoaderInstallPath( var.toString() );
-
-             } );
-
+ 
     setupChoices();
 
     // We need to do this because a PCM revert invalidates the deviceModel.
@@ -1053,7 +1039,21 @@ Config::updateActionChoicePreview( Config::InstallChoice choice )
 //                 eraseLayout->addWidget( eraseBootloaderLabel );
 //                 eraseBootloaderLabel->setText( tr( "Boot loader location:" ) );
 
-//                 m_bootloaderComboBox = createBootloaderComboBox( eraseWidget );
+//                 m_bootloaderComboBox = createBootloaderComboBox( eraseWidget );                
+                m_bootloaderModel = m_core->bootLoaderModel();
+                emit bootloaderModelChanged();
+                
+                // When the chosen bootloader device changes, we update the choice in the PCM
+                connect( m_bootloaderModel, &BootLoaderModel::currentIndexChanged,
+                         this, [this]( int newIndex )
+                         {
+                             QVariant var = m_bootloaderModel->data( m_bootloaderModel->index(newIndex, 0) , BootLoaderModel::BootLoaderPathRole );
+                             if ( !var.isValid() )
+                                 return;
+                             m_core->setBootLoaderInstallPath( var.toString() );
+                             
+                         } );
+                
                 connect( m_core->bootLoaderModel(), &QAbstractItemModel::modelReset,
                          [ this ]()
                          {
