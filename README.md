@@ -1,5 +1,6 @@
-### Calamares-qml: The Calamares installer but in QML.
----------
+## Calamares-qml
+
+The Calamares installer but in QML.
 
 [![Build Status](https://travis-ci.org/Nitrux/calamares-qml.svg?branch=master)](https://travis-ci.orgNitrux/calamares-qml)
 
