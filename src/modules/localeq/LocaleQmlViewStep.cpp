@@ -64,8 +64,6 @@ LocaleQmlViewStep::fetchGeoIpTimezone()
             cWarning() << "GeoIP lookup at" << m_geoip->url() << "failed.";
         }
     }
-
-    m_config->setLocaleInfo(m_startingTimezone.first, m_startingTimezone.second, m_localeGenPath);
 }
 
 Calamares::RequirementsList LocaleQmlViewStep::checkRequirements()
@@ -139,30 +137,25 @@ LocaleQmlViewStep::jobs() const
 
 void LocaleQmlViewStep::onActivate()
 {
-    // TODO no sure if it is needed at all or for the abstract class to start something
+    m_config->setLocaleInfo(m_startingTimezone.first, m_startingTimezone.second, m_localeGenPath);
+    
+    m_nextEnabled = true;
+    emit nextStatusChanged( m_nextEnabled );
 }
 
 void LocaleQmlViewStep::onLeave()
 {
-    if ( true )
+    m_jobs = m_config->createJobs();
+    m_prettyStatus = m_config->prettyStatus();
+    
+    auto map = m_config->localesMap();
+    QVariantMap vm;
+    for ( auto it = map.constBegin(); it != map.constEnd(); ++it )
     {
-        m_jobs = m_config->createJobs();
-        m_prettyStatus = m_config->prettyStatus();
-
-        auto map = m_config->localesMap();
-        QVariantMap vm;
-        for ( auto it = map.constBegin(); it != map.constEnd(); ++it )
-        {
-            vm.insert( it.key(), it.value() );
-        }
-
-        Calamares::JobQueue::instance()->globalStorage()->insert( "localeConf", vm );
+        vm.insert( it.key(), it.value() );
     }
-    else
-    {
-        m_jobs.clear();
-        Calamares::JobQueue::instance()->globalStorage()->remove( "localeConf" );
-    }
+    
+    Calamares::JobQueue::instance()->globalStorage()->insert( "localeConf", vm );
 }
 
 void LocaleQmlViewStep::setConfigurationMap(const QVariantMap& configurationMap)
@@ -200,6 +193,5 @@ void LocaleQmlViewStep::setConfigurationMap(const QVariantMap& configurationMap)
         }
     }
 
-    checkRequirements();
     Calamares::QmlViewStep::setConfigurationMap( configurationMap ); // call parent implementation last
 }

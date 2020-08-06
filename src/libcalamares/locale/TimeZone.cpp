@@ -277,7 +277,7 @@ CStringListModel::data( const QModelIndex& index, int role ) const
 void
 CStringListModel::setCurrentIndex( int index )
 {
-    if ( ( index < 0 ) || ( index >= m_list.count() ) )
+    if ( index >= m_list.count() )
     {
         return;
     }

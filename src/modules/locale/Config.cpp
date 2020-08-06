@@ -48,14 +48,14 @@ Config::Config( QObject* parent )
     , m_blockTzWidgetSet( false )
 {
     connect( m_regionModel, &CalamaresUtils::Locale::CStringListModel::currentIndexChanged, [&]() {
-        m_zonesModel->setList( static_cast< const CalamaresUtils::Locale::TZRegion* >(
-                                   m_regionModel->item( m_regionModel->currentIndex() ) )
-                                   ->zones() );
+        auto zones = static_cast<const CalamaresUtils::Locale::TZRegion*>(m_regionModel->item(m_regionModel->currentIndex()))->zones();
+        m_zonesModel->setList(zones);
+    });
+
+    connect( m_zonesModel, &CalamaresUtils::Locale::CStringListModel::currentIndexChanged, [&]() { 
+        updateGlobalStorage();
         updateLocaleLabels();
     } );
-
-    connect(
-        m_zonesModel, &CalamaresUtils::Locale::CStringListModel::currentIndexChanged, [&]() { updateLocaleLabels(); } );
 }
 
 Config::~Config()
@@ -77,7 +77,9 @@ Config::regionModel() const
 
 void
 Config::setLocaleInfo( const QString& initialRegion, const QString& initialZone, const QString& localeGenPath )
-{
+{    
+    cDebug() << "Setting lcoale info";
+    
     using namespace CalamaresUtils::Locale;
 
     cDebug() << "REGION MODEL SIZE" << initialRegion << initialZone;
@@ -85,14 +87,11 @@ Config::setLocaleInfo( const QString& initialRegion, const QString& initialZone,
     if ( region && region->zones().find< TZZone >( initialZone ) )
     {
         m_regionModel->setCurrentIndex( m_regionModel->indexOf( initialRegion ) );
-        m_zonesModel->setList( region->zones() );
         m_zonesModel->setCurrentIndex( m_zonesModel->indexOf( initialZone ) );
     }
     else
     {
         m_regionModel->setCurrentIndex( m_regionModel->indexOf( "America" ) );
-        m_zonesModel->setList(
-            static_cast< const TZRegion* >( m_regionModel->item( m_regionModel->currentIndex() ) )->zones() );
         m_zonesModel->setCurrentIndex( m_zonesModel->indexOf( "New_York" ) );
     }
 
@@ -170,8 +169,8 @@ Config::setLocaleInfo( const QString& initialRegion, const QString& initialZone,
         return;  // something went wrong and there's nothing we can do about it.
     }
 
-    // Assuming we have a list of supported locales, we usually only want UTF-8 ones
-    // because it's not 1995.
+//     Assuming we have a list of supported locales, we usually only want UTF-8 ones
+//     because it's not 1995.
     for ( auto it = m_localeGenLines.begin(); it != m_localeGenLines.end(); )
     {
         if ( !it->contains( "UTF-8", Qt::CaseInsensitive ) && !it->contains( "utf8", Qt::CaseInsensitive ) )
@@ -184,7 +183,7 @@ Config::setLocaleInfo( const QString& initialRegion, const QString& initialZone,
         }
     }
 
-    // We strip " UTF-8" from "en_US.UTF-8 UTF-8" because it's redundant redundant.
+//     We strip " UTF-8" from "en_US.UTF-8 UTF-8" because it's redundant redundant.
     for ( auto it = m_localeGenLines.begin(); it != m_localeGenLines.end(); ++it )
     {
         if ( it->endsWith( " UTF-8" ) )
@@ -313,9 +312,9 @@ QString
 Config::prettyStatus() const
 {
     QString status;
-    status += tr( "Set timezone to %1/%2.<br/>" )
-                  .arg( m_regionModel->item( m_regionModel->currentIndex() )->tr() )
-                  .arg( m_zonesModel->item( m_zonesModel->currentIndex() )->tr() );
+//     status += tr( "Set timezone to %1/%2.<br/>" )
+//                   .arg( m_regionModel->item( m_regionModel->currentIndex() )->tr() )
+//                   .arg( m_zonesModel->item( m_zonesModel->currentIndex() )->tr() );
 
     LocaleConfiguration lc
         = m_selectedLocaleConfiguration.isEmpty() ? guessLocaleConfiguration() : m_selectedLocaleConfiguration;
