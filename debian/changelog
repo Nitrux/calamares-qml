@@ -1,3 +1,9 @@
+calamares-qml (3.2.26.8) nitrux; urgency=medium
+
+  * Update Calamares.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Wed, 29 Jul 2020 21:03:00 -0500
+
 calamares-qml (3.2.26.7) nitrux; urgency=medium
 
   * Update Calamares.

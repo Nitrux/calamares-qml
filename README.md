@@ -1,13 +1,8 @@
-### Calamares: Distribution-Independent Installer Framework
----------
+## Calamares-qml
 
-[![GitHub release](https://img.shields.io/github/release/calamares/calamares.svg)](https://github.com/calamares/calamares/releases)
-[![Travis Build Status](https://travis-ci.org/calamares/calamares.svg?branch=master)](https://travis-ci.org/calamares/calamares)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/5389/badge.svg)](https://scan.coverity.com/projects/5389)
-[![GitHub license](https://img.shields.io/github/license/calamares/calamares.svg)](https://github.com/calamares/calamares/blob/master/LICENSE)
+The Calamares installer but in QML.
 
-| [Report a Bug](https://github.com/calamares/calamares/issues/new) | [Translate](https://www.transifex.com/projects/p/calamares/) | [Contribute](https://github.com/calamares/calamares/wiki/Develop-Guide) | Freenode (IRC): #calamares | [Wiki](https://github.com/calamares/calamares/wiki) |
-|:-----------------------------------------:|:----------------------:|:-----------------------:|:--------------------------:|:--------------------------:|
+[![Build Status](https://travis-ci.org/Nitrux/calamares-qml.svg?branch=master)](https://travis-ci.orgNitrux/calamares-qml)
 
 ### Dependencies
 
@@ -30,9 +25,7 @@ Modules:
 * *partition* KPMCore >= 3.3
 * *users* LibPWQuality (optional)
 
-### Building
+# Issues
+If you find problems with the contents of this repository please create an issue.
 
-See [wiki](https://github.com/calamares/calamares/wiki) for up to date
-[building](https://github.com/calamares/calamares/wiki/Develop-Guide)
-and [deployment](https://github.com/calamares/calamares/wiki/Deploy-Guide)
-instructions.
+©2020 Nitrux Latinoamericana S.C.
