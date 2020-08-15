@@ -1,4 +1,4 @@
-dist: kdeneon/plasma:user
+dist: bionic
 
 script:
   - sudo ./travis-build.sh
