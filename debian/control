@@ -1,8 +1,7 @@
 Source: calamares-qml
 Section: utils
 Priority: optional
-Maintainer: Lubuntu Developers <lubuntu-devel@lists.ubuntu.com>
-XSBC-Original-Maintainer: Jonathan Carter <jcc@debian.org>
+Maintainer: Camilo Higuita <milo.h@aol.com>
 Build-Depends: cmake,
                cryptsetup,
                debhelper-compat (= 12),
@@ -41,11 +40,8 @@ Build-Depends: cmake,
                libkf5plasma-dev,
                libkf5package-dev,
 Standards-Version: 4.5.0
-Homepage: https://github.com/calamares/calamares
-Vcs-Browser: https://phab.lubuntu.me/source/calamares/
-Vcs-Git: https://phab.lubuntu.me/source/calamares.git
-XS-Debian-Vcs-Browser: https://salsa.debian.org/qt-kde-team/kde-extras/calamares
-XS-Debian-Vcs-Git: https://salsa.debian.org/qt-kde-team/kde-extras/calamares.git
+Homepage: https://github.com/Nitrux/calamares-qml
+Vcs-Git: https://github.com/Nitrux/calamares-qml.git
 
 Package: calamares-qml
 Architecture: linux-any

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-apt -qq update
+apt update
+apt-cache policy
 apt -qq -yy install equivs curl git
 
 ### Install Dependencies
