@@ -1,4 +1,4 @@
-dist: mauikit/ubuntu-18.04-amd64
+dist: kdeneon/plasma:user
 
 script:
   - sudo ./travis-build.sh
