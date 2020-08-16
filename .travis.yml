@@ -1,4 +1,4 @@
-dist: mauikit/ubuntu-18.04-amd64
+dist: bionic
 
 script:
   - sudo ./travis-build.sh
