@@ -1,3 +1,9 @@
+calamares-qml (3.2.26.11) nitrux; urgency=medium
+
+  * Remove HTML markup from finishedq module.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 28 Sep 2020 19:18:00 -0500
+
 calamares-qml (3.2.26.10) nitrux; urgency=medium
 
   * Fix typo in password checkbox.
