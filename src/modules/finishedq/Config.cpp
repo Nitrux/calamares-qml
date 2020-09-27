@@ -47,11 +47,9 @@ Config::Config(QObject *parent) : QObject(parent)
             "You may now start using your new system." )
             .arg( branding->versionedName() );
 
-            m_restartOption->setLabel( tr( "<html><head/><body>"
-            "<p>When this box is checked, your system will "
+            m_restartOption->setLabel( tr( "When this box is checked, your system will "
             "restart immediately when you click on "
-            "<span style=\"font-style:italic;\">Done</span> "
-            "or close the setup program.</p></body></html>" )) ;
+            "Done or close the setup program." )) ;
         } else {
             m_message =  tr( "<h1>All done.</h1><br/>"
             "%1 has been installed on your computer.<br/>"
@@ -59,11 +57,9 @@ Config::Config(QObject *parent) : QObject(parent)
             "using the %2 Live environment." )
             .arg( branding->versionedName(), branding->productName() ) ;
 
-           m_restartOption->setLabel( tr( "<html><head/><body>"
-            "<p>When this box is checked, your system will "
+           m_restartOption->setLabel( tr( "When this box is checked, your system will "
             "restart immediately when you click on "
-            "<span style=\"font-style:italic;\">Done</span> "
-            "or close the installer.</p></body></html>" ) );
+            "Done or close the installer." ) );
         }
 
         emit messageChanged();)
