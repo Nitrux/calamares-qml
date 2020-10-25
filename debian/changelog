@@ -1,8 +1,8 @@
-calamares-qml (3.2.26.12) nitrux; urgency=medium
+calamares-qml (3.2.26.13) nitrux; urgency=medium
 
-  * Remove HTML markup from finishedq module.
+  * Use focal to build package.
 
- -- Uri Herrera <uri_herrera@nxos.org>  Sat, 24 Oct 2020 22:15:00 -0500
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 25 Oct 2020 03:24:00 -0500
 
 calamares-qml (3.2.26.11) nitrux; urgency=medium
 
