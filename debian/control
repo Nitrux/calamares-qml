@@ -38,6 +38,7 @@ Build-Depends: cmake,
                qttools5-dev,
                qttools5-dev-tools,
                libkf5plasma-dev,
+               libkf5crash-dev,
                libkf5package-dev
 Standards-Version: 4.5.0
 Homepage: https://github.com/Nitrux/calamares-qml
